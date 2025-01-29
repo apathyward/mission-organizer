@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const jsonUrl = "https://raw.githubusercontent.com/apathyward/mission-organizer/main/missions.json"; 
-    const firebaseUrl = "https://your-firebase-url.firebaseio.com/selections.json"; // Replace with your Firebase URL
+    const firebaseUrl = "https://mission-organizer-default-rtdb.firebaseio.com/selections.json";
 
-    async function fetchData(): Promise<{ id?: string; name: string }[]> {
+    async function fetchData() {
         try {
             const response = await fetch(jsonUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -18,10 +18,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (data.length === 0) return;
 
         for (let week = 1; week <= 8; week++) {
-            const dropdown = document.getElementById(`dynamicDropdown${week}`) as HTMLSelectElement | null;
-            if (!dropdown) continue;
+            const dropdown = document.getElementById(`dynamicDropdown${week}`);
+            dropdown.innerHTML = ""; 
 
-            dropdown.innerHTML = ""; // Clear existing options
             const defaultOption = document.createElement("option");
             defaultOption.textContent = "Select an option";
             defaultOption.value = "";
@@ -37,29 +36,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     async function submitSelections() {
-        const selections: Record<string, string> = {};
+        const selections = {};
         for (let week = 1; week <= 8; week++) {
-            const dropdown = document.getElementById(`dynamicDropdown${week}`) as HTMLSelectElement | null;
-            if (dropdown && dropdown.value) {
-                selections[`week${week}`] = dropdown.value;
-            }
+            selections[`week${week}`] = document.getElementById(`dynamicDropdown${week}`).value;
         }
 
-        // Send selections to Firebase (or another backend)
         try {
             const response = await fetch(firebaseUrl, {
-                method: "PUT",
+                method: "PUT", 
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(selections),
+                body: JSON.stringify(selections)
             });
 
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) throw new Error("Failed to save selections.");
             alert("Selections saved successfully!");
         } catch (error) {
-            console.error("Error submitting selections:", error);
+            console.error("Error saving selections:", error);
         }
     }
 
-    document.getElementById("submitButton")?.addEventListener("click", submitSelections);
+    window.submitSelections = submitSelections; // Expose function globally
     populateDropdowns();
 });

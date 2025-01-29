@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weekly Mission Selector</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    select, input {
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      display: block;
-      width: 100%;
-    }
-    label {
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Organizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <h2>Select Your Weekly Options</h2>
+    
+    <div id="dropdownContainer">
+        <label for="dynamicDropdown1">Week 1</label>
+        <select id="dynamicDropdown1"><option>Loading...</option></select>
 
-  <h2>Select Your Weekly Missions</h2>
+        <label for="dynamicDropdown2">Week 2</label>
+        <select id="dynamicDropdown2"><option>Loading...</option></select>
 
-  <div id="dropdownContainer">
-    <label for="dynamicDropdown1">Week 1</label>
-    <select id="dynamicDropdown1"><option>Loading...</option></select>
+        <label for="dynamicDropdown3">Week 3</label>
+        <select id="dynamicDropdown3"><option>Loading...</option></select>
 
-    <label for="dynamicDropdown2">Week 2</label>
-    <select id="dynamicDropdown2"><option>Loading...</option></select>
+        <label for="dynamicDropdown4">Week 4</label>
+        <select id="dynamicDropdown4"><option>Loading...</option></select>
 
-    <label for="dynamicDropdown3">Week 3</label>
-    <select id="dynamicDropdown3"><option>Loading...</option></select>
+        <label for="dynamicDropdown5">Week 5</label>
+        <select id="dynamicDropdown5"><option>Loading...</option></select>
 
-    <label for="dynamicDropdown4">Week 4</label>
-    <select id="dynamicDropdown4"><option>Loading...</option></select>
+        <label for="dynamicDropdown6">Week 6</label>
+        <select id="dynamicDropdown6"><option>Loading...</option></select>
 
-    <label for="dynamicDropdown5">Week 5</label>
-    <select id="dynamicDropdown5"><option>Loading...</option></select>
+        <label for="dynamicDropdown7">Week 7</label>
+        <select id="dynamicDropdown7"><option>Loading...</option></select>
 
-    <label for="dynamicDropdown6">Week 6</label>
-    <select id="dynamicDropdown6"><option>Loading...</option></select>
+        <label for="dynamicDropdown8">Week 8</label>
+        <select id="dynamicDropdown8"><option>Loading...</option></select>
+    </div>
 
-    <label for="dynamicDropdown7">Week 7</label>
-    <select id="dynamicDropdown7"><option>Loading...</option></select>
+    <button onclick="submitSelections()">Submit Selections</button>
 
-    <label for="dynamicDropdown8">Week 8</label>
-    <select id="dynamicDropdown8"><option>Loading...</option></select>
-  </div>
-
-  <script src="script.js"></script> <!-- Include compiled JS -->
+    <script src="script.js"></script>
 </body>
 </html>
