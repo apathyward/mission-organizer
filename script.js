@@ -17,7 +17,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (data.length === 0) return;
 
         for (let week = 1; week <= 8; week++) {
-            const dropdown = document.getElementById(`dynamicDropdown${week}`) as HTMLSelectElement;
+            const dropdown = document.getElementById(`dynamicDropdown${week}`) as HTMLSelectElement | null;
+            
+            if (!dropdown) {
+                console.warn(`Dropdown #${week} not found.`);
+                continue;
+            }
+
             dropdown.innerHTML = ""; // Clear existing options
 
             // Add default option
