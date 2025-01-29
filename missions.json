@@ -1,0 +1,13 @@
+[
+    {
+      "name": "Enfeebling Wave",
+      "description": "Before the battle, divide the battlefield into quarters, then, players roll off and the winner determines which quarter of the battlefield is AFFLICTED with illness. The other player then decides if the AFFLICTION will rotate counterclockwise or clockwise.\n\nFighters in the AFFLICTED quarter of the battlefield are ENFEEBLED, and have -1 toughness.\n\nAt the end of each battle round score 1 VP for each quarter of the battlefield in which you:\n - Have 1 or more fighters wholly within that quarter\n - Have taken down a fighter with a melee attack action wholly within that quarter.\n\nIn addition, score 2 VP if you have the most fighters in the AFFLICTED quarter.\n\nThe battle ends after 4 battle rounds. The player with the most victory points wins the battle. Any other result is a draw.",
+      "image_url": "https://example.com/enfeebling_wave.jpg"
+    },
+    {
+      "name": "Might Makes Right",
+      "description": "The victorious hordes of chaos have infused the local realmstone with their bloodthirsty energies. You must secure it, but note that violence done in the realmstone's presence has a fortifying effect on the perpetrators.\n\nVICTORY CONDITION\nPlace one objective in the center of the battlefield. Then, starting with the player who won initiative, players alternate placing objectives until they have each placed two. Objectives may be placed on the battlefield floor, or on a platform. Objectives must be placed at least 4\" from the battlefield edge, and at least 6\" horizontally from all other objectives.\n\nAt the end of each battle round, each player scores 1 victory point for each objective they control. In addition, whenever a fighter takes down another fighter while both are contesting the same objective, that fighter's controller scores 1 victory point.\n\nThe battle ends after 4 battle rounds.",
+      "image_url": "https://example.com/might_makes_right.jpg"
+    }
+  ]
+  
