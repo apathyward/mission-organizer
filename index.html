@@ -21,12 +21,16 @@
             margin-top: 10px;
             display: block;
         }
+        #dropdownContainer {
+            max-width: 300px; /* Adjust as needed */
+            width: 100%; /* Ensures full width on small screens */
+        }
     </style>
 </head>
 <body>
     <h2>Select This Month's Tournament Missions</h2>
     
-    <div id="dropdownContainer" width="25%">
+    <div id="dropdownContainer">
         <label for="dynamicDropdown1">Week 1</label>
         <select id="dynamicDropdown1"><option>Loading...</option></select>
 
