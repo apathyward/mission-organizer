@@ -8,22 +8,28 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
+            text-align: center; /* Centers the dropdowns and button */
         }
+        
+        #dropdownContainer {
+            max-width: 300px; /* Restricts width on larger screens */
+            width: 100%; /* Allows full width on mobile */
+            margin: 0 auto; /* Centers the container */
+        }
+        
         select, button {
+            max-width: 300px; /* Matches container width */
+            width: 100%; /* Ensures full width on mobile */
             padding: 10px;
             font-size: 16px;
-            margin-bottom: 10px;
             display: block;
-            width: 100%;
+            margin: 10px auto; /* Centers them */
         }
+        
         label {
             font-weight: bold;
             margin-top: 10px;
             display: block;
-        }
-        #dropdownContainer {
-            max-width: 300px; /* Adjust as needed */
-            width: 100%; /* Ensures full width on small screens */
         }
     </style>
 </head>
