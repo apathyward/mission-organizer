@@ -5,34 +5,51 @@ document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch(jsonUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            return await response.json();
+            const data = await response.json();
+            console.log("Loaded Missions Data:", data); // Debugging: Check JSON structure
+            return data;
         } catch (error) {
             console.error("Error loading JSON:", error);
             return [];
         }
     }
 
-    let missionsData = []; // Store missions data for all playstyles
+    let missionsData = [];
 
     async function populateDropdowns() {
         missionsData = await fetchData();
-        if (missionsData.length === 0) return;
-
-        updateMissions(); // Set initial values based on the selected playstyle
+        if (!Array.isArray(missionsData) || missionsData.length === 0) {
+            console.error("Missions data is empty or not an array.");
+            return;
+        }
+        updateMissions();
     }
 
     function updateMissions() {
         const selectedPlaystyle = document.getElementById("playstyleDropdown").value;
+        console.log("Selected Playstyle:", selectedPlaystyle); // Debugging
+
+        if (!Array.isArray(missionsData)) {
+            console.error("Missions data is not an array:", missionsData);
+            return;
+        }
+
         const filteredMissions = missionsData.filter(m => m.category === selectedPlaystyle);
+        console.log("Filtered Missions:", filteredMissions); // Debugging
 
         for (let week = 1; week <= 8; week++) {
             const dropdown = document.getElementById(`dynamicDropdown${week}`);
-            dropdown.innerHTML = ""; // Clear existing options
+            dropdown.innerHTML = ""; 
 
             const defaultOption = document.createElement("option");
             defaultOption.textContent = "Select an option";
             defaultOption.value = "";
             dropdown.appendChild(defaultOption);
+
+            if (filteredMissions.length === 0) {
+                console.warn(`No missions found for ${selectedPlaystyle}.`);
+                continue;
+            }
 
             filteredMissions.forEach((item) => {
                 const option = document.createElement("option");
@@ -47,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const selectedPlaystyle = document.getElementById("playstyleDropdown").value;
         const selections = {};
         let hasSelection = false;
-    
+
         for (let week = 1; week <= 8; week++) {
             const dropdown = document.getElementById(`dynamicDropdown${week}`);
             if (dropdown.value) {
@@ -58,12 +75,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         if (!hasSelection) {
             console.log("No selections made. Aborting update.");
-            return; // Don't send empty data
+            return;
         }
-    
+
         fetch("https://mission-organizer-default-rtdb.firebaseio.com/selections.json", {
-            method: "PATCH", // Use PATCH to only update specific fields
-            body: JSON.stringify({ [selectedPlaystyle]: selections }), // Store selections under the playstyle key
+            method: "PATCH",
+            body: JSON.stringify({ [selectedPlaystyle]: selections }),
             headers: { "Content-Type": "application/json" }
         })
         .then(response => response.json())
@@ -71,8 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .catch(error => console.error("Error updating selections:", error));
     }
 
-    // Attach updateMissions to window so it works in HTML
     window.updateMissions = updateMissions;
-    
+
     populateDropdowns();
 });
