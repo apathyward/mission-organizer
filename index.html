@@ -8,22 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            text-align: center; /* Centers the dropdowns and button */
+            text-align: center;
         }
         
         #dropdownContainer {
-            max-width: 300px; /* Restricts width on larger screens */
-            width: 100%; /* Allows full width on mobile */
-            margin: 0 auto; /* Centers the container */
+            max-width: 300px;
+            width: 100%;
+            margin: 0 auto;
         }
         
         select, button {
-            max-width: 300px; /* Matches container width */
-            width: 100%; /* Ensures full width on mobile */
+            max-width: 300px;
+            width: 100%;
             padding: 10px;
             font-size: 16px;
             display: block;
-            margin: 10px auto; /* Centers them */
+            margin: 10px auto;
         }
         
         label {
@@ -38,11 +38,11 @@
 
     <!-- Playstyle Dropdown -->
     <label for="playstyleDropdown">Select Tournament to Update</label>
-    <select id="playstyleDropdown" onchange="updateMissions()">
+    <select id="playstyleDropdown">
         <option value="Competitive">Competitive</option>
         <option value="Casual">Casual</option>
         <option value="Narrative">Narrative</option>
-    </select>    
+    </select>
     
     <div id="dropdownContainer">
         <label for="dynamicDropdown1">Week 1</label>
