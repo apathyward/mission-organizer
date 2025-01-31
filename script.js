@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const jsonUrl = "https://raw.githubusercontent.com/apathyward/mission-organizer/main/missions.json";
     const firebaseUrl = "https://mission-organizer-default-rtdb.firebaseio.com/selections.json";
 
+    // The plaintext password
+    const correctPassword = "CloudyRainForest5";
+
     // Store missions data
     let missionsData = [];
 
@@ -66,18 +69,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         .catch(error => console.error("Error updating selections:", error));
     }
 
-    // Function to verify the password using SHA-256 hashing
+    // Function to verify the password directly (no hashing)
     function verifyPassword() {
         const enteredPassword = document.getElementById("passwordInput").value;
-        
-        // Hash the entered password
-        const hashedEnteredPassword = CryptoJS.SHA256(enteredPassword).toString(CryptoJS.enc.Base64);
 
-        // Correct hash for "CloudyRainForest5"
-        const correctPasswordHash = "c3b505bb07679c697a97f2b2c98e3568df78a8f74f8f586dcf8a92b9b70fe742";
-
-        // Compare hashes
-        if (hashedEnteredPassword === correctPasswordHash) {
+        // Check if the entered password matches the correct password
+        if (enteredPassword === correctPassword) {
             // Enable the dropdowns and submit button if password is correct
             document.getElementById("playstyleDropdown").disabled = false;
             document.querySelector("button").disabled = false;
