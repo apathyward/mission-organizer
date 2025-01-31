@@ -72,20 +72,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Function to verify the password when the button is pressed
     function verifyPassword() {
         const enteredPassword = document.getElementById("passwordInput").value;
-
+    
         // Check if the entered password matches the correct password
         if (enteredPassword === correctPassword) {
             // Enable the dropdowns and submit button if password is correct
             document.getElementById("playstyleDropdown").disabled = false;
-            document.querySelector("button").disabled = false;
+            document.getElementById("submitSelectionsButton").disabled = false;  // Targeting the submit button by id
             alert("Password correct. You can now select missions and submit.");
         } else {
             // Optionally reset input field or give feedback
             alert("Incorrect password.");
             document.getElementById("playstyleDropdown").disabled = true;
-            document.querySelector("button").disabled = true;
+            document.getElementById("submitSelectionsButton").disabled = true;  // Targeting the submit button by id
         }
-    }
+    }    
 
     // Attach password verification to the button
     document.getElementById("submitPasswordButton").addEventListener("click", function (event) {
