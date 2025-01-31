@@ -46,19 +46,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     
         for (let week = 1; week <= 8; week++) {
             const dropdown = document.getElementById(`dynamicDropdown${week}`);
-            if (dropdown.value && dropdown.value.trim() !== "") {
-                selections[`week${week}`] = dropdown.value;
-            }
-        }
-    
-        // Ensure we only send data if there's at least one valid selection
-        if (Object.keys(selections).length === 0) {
-            console.log("No selections made. Aborting update.");
-            return;
+            selections[`week${week}`] = dropdown.value.trim() !== "" ? dropdown.value : null;
         }
     
         fetch("https://mission-organizer-default-rtdb.firebaseio.com/selections.json", {
-            method: "PATCH", // Only update the selected playstyle
+            method: "PATCH", // Use PATCH to update only selected playstyle
             body: JSON.stringify({ [selectedPlaystyle]: selections }),
             headers: { "Content-Type": "application/json" }
         })
@@ -67,7 +59,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         .catch(error => console.error("Error updating selections:", error));
     }
     
-
     window.submitSelections = submitSelections;
     populateDropdowns();
 });
