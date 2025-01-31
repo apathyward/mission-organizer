@@ -87,7 +87,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Attach password verification to the button
-    document.getElementById("submitPasswordButton").addEventListener("click", verifyPassword);
+    document.getElementById("submitPasswordButton").addEventListener("click", function (event) {
+        event.preventDefault();  // Prevent any default actions
+        verifyPassword();
+    });
 
     window.submitSelections = submitSelections;  // Expose the submit function
     populateDropdowns();  // Populate the dropdowns on load
