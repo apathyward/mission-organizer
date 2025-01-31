@@ -8,22 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            text-align: center;
+            text-align: center; /* Centers the dropdowns and button */
         }
 
         #dropdownContainer {
-            max-width: 300px;
-            width: 100%;
-            margin: 0 auto;
+            max-width: 300px; /* Restricts width on larger screens */
+            width: 100%; /* Allows full width on mobile */
+            margin: 0 auto; /* Centers the container */
         }
 
         select, button, input {
-            max-width: 300px;
-            width: 100%;
+            max-width: 300px; /* Matches container width */
+            width: 100%; /* Ensures full width on mobile */
             padding: 10px;
             font-size: 16px;
             display: block;
-            margin: 10px auto;
+            margin: 10px auto; /* Centers them */
         }
 
         label {
@@ -31,57 +31,50 @@
             margin-top: 10px;
             display: block;
         }
-
-        #mainContent {
-            display: none; /* Hide content until password is entered */
-        }
     </style>
 </head>
 <body>
-    <div id="authSection">
-        <h2>Enter Password to Access</h2>
-        <input type="password" id="passwordInput" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
+    <h2>Select This Month's Tournament Missions</h2>
+
+    <!-- Password Input -->
+    <label for="passwordInput">Enter Password</label>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+
+    <!-- Playstyle Dropdown -->
+    <label for="playstyleDropdown">Select Tournament to Update</label>
+    <select id="playstyleDropdown" onchange="updateMissions()" disabled>
+        <option value="Competitive">Competitive</option>
+        <option value="Casual">Casual</option>
+        <option value="Narrative">Narrative</option>
+    </select>
+
+    <div id="dropdownContainer">
+        <label for="dynamicDropdown1">Week 1</label>
+        <select id="dynamicDropdown1"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown2">Week 2</label>
+        <select id="dynamicDropdown2"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown3">Week 3</label>
+        <select id="dynamicDropdown3"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown4">Week 4</label>
+        <select id="dynamicDropdown4"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown5">Week 5</label>
+        <select id="dynamicDropdown5"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown6">Week 6</label>
+        <select id="dynamicDropdown6"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown7">Week 7</label>
+        <select id="dynamicDropdown7"><option>Loading...</option></select>
+
+        <label for="dynamicDropdown8">Week 8</label>
+        <select id="dynamicDropdown8"><option>Loading...</option></select>
     </div>
 
-    <div id="mainContent">
-        <h2>Select This Month's Tournament Missions</h2>
-
-        <label for="playstyleDropdown">Select Tournament to Update</label>
-        <select id="playstyleDropdown">
-            <option value="Competitive">Competitive</option>
-            <option value="Casual">Casual</option>
-            <option value="Narrative">Narrative</option>
-        </select>
-
-        <div id="dropdownContainer">
-            <label for="dynamicDropdown1">Week 1</label>
-            <select id="dynamicDropdown1"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown2">Week 2</label>
-            <select id="dynamicDropdown2"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown3">Week 3</label>
-            <select id="dynamicDropdown3"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown4">Week 4</label>
-            <select id="dynamicDropdown4"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown5">Week 5</label>
-            <select id="dynamicDropdown5"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown6">Week 6</label>
-            <select id="dynamicDropdown6"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown7">Week 7</label>
-            <select id="dynamicDropdown7"><option>Loading...</option></select>
-
-            <label for="dynamicDropdown8">Week 8</label>
-            <select id="dynamicDropdown8"><option>Loading...</option></select>
-        </div>
-
-        <button onclick="submitSelections()">Submit Selections</button>
-    </div>
+    <button onclick="submitSelections()" disabled>Submit Selections</button>
 
     <script src="script.js"></script>
 </body>

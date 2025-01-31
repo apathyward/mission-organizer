@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const jsonUrl = "https://raw.githubusercontent.com/apathyward/mission-organizer/main/missions.json";
     const firebaseUrl = "https://mission-organizer-default-rtdb.firebaseio.com/selections.json";
-    const correctHash = "61e1220a1c7991fd31c7551c469406e79b38e6fcbe0a7c3e8971fdf08a2af4b8"; // SHA-256 hash of "CloudyRainForest5"
 
+    // Store missions data
+    let missionsData = [];
+
+    // Function to fetch missions data
     async function fetchMissions() {
         try {
             const response = await fetch(jsonUrl);
@@ -14,8 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    let missionsData = []; // Stores missions from JSON
-
+    // Function to populate the week dropdowns
     async function populateDropdowns() {
         missionsData = await fetchMissions();
         if (!Array.isArray(missionsData) || missionsData.length === 0) {
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
+        // Populate the dropdowns for each week
         for (let week = 1; week <= 8; week++) {
             const dropdown = document.getElementById(`dynamicDropdown${week}`);
             dropdown.innerHTML = ""; // Clear existing options
@@ -41,31 +44,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    async function checkPassword() {
-        const passwordInput = document.getElementById("passwordInput").value;
-        const encoder = new TextEncoder();
-        const data = encoder.encode(passwordInput);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-
-        if (hashHex === correctHash) {
-            document.getElementById("authSection").style.display = "none";
-            document.getElementById("mainContent").style.display = "block";
-        } else {
-            alert("Incorrect password.");
-        }
-    }
-
+    // Function to submit selections to Firebase
     function submitSelections() {
         const selectedPlaystyle = document.getElementById("playstyleDropdown").value;
         const selections = {};
-    
+
+        // Gather the selections for each week
         for (let week = 1; week <= 8; week++) {
             const dropdown = document.getElementById(`dynamicDropdown${week}`);
             selections[`week${week}`] = dropdown.value.trim() !== "" ? dropdown.value : null;
         }
-    
+
+        // Send only the selected playstyle updates to Firebase
         fetch(firebaseUrl, {
             method: "PATCH", // Use PATCH to update only selected playstyle
             body: JSON.stringify({ [selectedPlaystyle]: selections }),
@@ -75,8 +65,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         .then(data => console.log("Selections updated:", data))
         .catch(error => console.error("Error updating selections:", error));
     }
-    
-    window.checkPassword = checkPassword;
-    window.submitSelections = submitSelections;
-    populateDropdowns();
+
+    // Function to verify the password
+    function verifyPassword() {
+        const enteredPassword = document.getElementById("passwordInput").value;
+        const hashedEnteredPassword = sha256(enteredPassword);  // Hash the entered password
+
+        // Correct hash for "CloudyRainForest5"
+        const correctPasswordHash = "c3b505bb07679c697a97f2b2c98e3568df78a8f74f8f586dcf8a92b9b70fe742";
+
+        if (hashedEnteredPassword === correctPasswordHash) {
+            // Enable the dropdowns and submit button if password is correct
+            document.getElementById("playstyleDropdown").disabled = false;
+            document.querySelector("button").disabled = false;
+            alert("Password correct. You can now select missions and submit.");
+        } else {
+            alert("Incorrect password.");
+        }
+    }
+
+    // Attach password verification to input field
+    document.getElementById("passwordInput").addEventListener("input", verifyPassword);
+
+    window.submitSelections = submitSelections;  // Expose the submit function
+    populateDropdowns();  // Populate the dropdowns on load
 });
