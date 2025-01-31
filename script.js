@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .catch(error => console.error("Error updating selections:", error));
     }
 
-    // Function to verify the password directly (no hashing)
+    // Function to verify the password when the button is pressed
     function verifyPassword() {
         const enteredPassword = document.getElementById("passwordInput").value;
 
@@ -86,8 +86,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Attach password verification to input field
-    document.getElementById("passwordInput").addEventListener("input", verifyPassword);
+    // Attach password verification to the button
+    document.getElementById("submitPasswordButton").addEventListener("click", verifyPassword);
 
     window.submitSelections = submitSelections;  // Expose the submit function
     populateDropdowns();  // Populate the dropdowns on load
