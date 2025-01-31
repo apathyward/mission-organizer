@@ -80,9 +80,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.querySelector("button").disabled = false;
             alert("Password correct. You can now select missions and submit.");
         } else {
+            // Optionally reset input field or give feedback
+            alert("Incorrect password.");
             document.getElementById("playstyleDropdown").disabled = true;
             document.querySelector("button").disabled = true;
-            alert("Incorrect password.");
         }
     }
 
