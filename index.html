@@ -35,6 +35,14 @@
 </head>
 <body>
     <h2>Select This Month's Tournament Missions</h2>
+
+    <!-- Playstyle Dropdown -->
+    <label for="playstyleDropdown">Select Tournament to Update</label>
+    <select id="playstyleDropdown" onchange="updateMissions()">
+        <option value="Competitive">Competitive</option>
+        <option value="Casual">Casual</option>
+        <option value="Narrative">Narrative</option>
+    </select>
     
     <div id="dropdownContainer">
         <label for="dynamicDropdown1">Week 1</label>
