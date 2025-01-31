@@ -66,20 +66,25 @@ document.addEventListener("DOMContentLoaded", async function () {
         .catch(error => console.error("Error updating selections:", error));
     }
 
-    // Function to verify the password
+    // Function to verify the password using SHA-256 hashing
     function verifyPassword() {
         const enteredPassword = document.getElementById("passwordInput").value;
-        const hashedEnteredPassword = sha256(enteredPassword);  // Hash the entered password
+        
+        // Hash the entered password
+        const hashedEnteredPassword = CryptoJS.SHA256(enteredPassword).toString(CryptoJS.enc.Base64);
 
         // Correct hash for "CloudyRainForest5"
         const correctPasswordHash = "c3b505bb07679c697a97f2b2c98e3568df78a8f74f8f586dcf8a92b9b70fe742";
 
+        // Compare hashes
         if (hashedEnteredPassword === correctPasswordHash) {
             // Enable the dropdowns and submit button if password is correct
             document.getElementById("playstyleDropdown").disabled = false;
             document.querySelector("button").disabled = false;
             alert("Password correct. You can now select missions and submit.");
         } else {
+            document.getElementById("playstyleDropdown").disabled = true;
+            document.querySelector("button").disabled = true;
             alert("Incorrect password.");
         }
     }
